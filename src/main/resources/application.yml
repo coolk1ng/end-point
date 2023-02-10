@@ -1,0 +1,39 @@
+server:
+  port: 3333
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/frame-use?useUnicode=true&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+# 邮件
+  mail:
+    from: coolk1ng@163.com
+    protocol: smtps
+    host: smtp.163.com
+    port: 465
+    username: coolk1ng@163.com
+    password: xxxxxxx
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+        debug: true
+# rabbitmq
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+# mybatis
+mybatis:
+  mapper-locations: classpath*:mapper/*/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.coolk1ng: debug
+
