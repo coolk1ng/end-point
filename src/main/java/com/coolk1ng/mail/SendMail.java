@@ -1,5 +1,10 @@
 package com.coolk1ng.mail;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,4 +90,16 @@ public class SendMail {
         }
         mailSender.send(mineMessage);
     }
+
+    public static void main(String[] args) {
+        System.out.println(JSON.toJSONStringWithDateFormat(new Person("张三", new Date()), "yyyy/MM/dd HH:mm:ss", SerializerFeature.WriteNullStringAsEmpty));
+    }
+}
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+class Person {
+    private String name;
+    private Date birth;
 }

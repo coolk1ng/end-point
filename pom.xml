@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.coolk1ng</groupId>
-    <artifactId>frame-use</artifactId>
+    <artifactId>end-point</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>frame-use</name>
-    <description>frame-use</description>
+    <name>end-point</name>
+    <description>end-point</description>
     <properties>
         <java.version>11</java.version>
     </properties>

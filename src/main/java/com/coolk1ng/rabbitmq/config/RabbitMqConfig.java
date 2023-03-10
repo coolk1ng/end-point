@@ -2,6 +2,10 @@ package com.coolk1ng.rabbitmq.config;
 
 
 import com.rabbitmq.client.Channel;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.Connection;
@@ -21,7 +25,7 @@ import java.io.IOException;
  * @author coolk1ng
  * @since 2023/1/15 03:49
  */
-@Configuration
+//@Configuration
 public class RabbitMqConfig
 {
 
@@ -38,7 +42,7 @@ public class RabbitMqConfig
         cachingConnectionFactory.setUsername(username);
         cachingConnectionFactory.setPassword(password);
         cachingConnectionFactory.setVirtualHost(virtualHost);
-        cachingConnectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.NONE);
+        cachingConnectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
         cachingConnectionFactory.setPublisherReturns(true);
         return cachingConnectionFactory;
     }
@@ -69,13 +73,13 @@ public class RabbitMqConfig
         Channel channel;
         try (Connection connection = connectionFactory.createConnection()) {
             channel = connection.createChannel(false);
-
+            channel.confirmSelect();
             channel.exchangeDeclare("test_exchange", "direct", true, false, null);
             channel.queueDeclare("test_queue", true, false, false, null);
             channel.queueBind("test_queue", "test_exchange", "test_routingKey");
 
-            channel.queueDeclare("hello_queue", true, false, false, null);
-            channel.queueBind("hello_queue", "test_exchange", "hello_routingKey");
+//            channel.queueDeclare("hello_queue", true, false, false, null);
+//            channel.queueBind("hello_queue", "test_exchange", "hello_routingKey");
 
             //channel.queueDeclare("test",true, false, false, null);
         } catch (IOException e) {
