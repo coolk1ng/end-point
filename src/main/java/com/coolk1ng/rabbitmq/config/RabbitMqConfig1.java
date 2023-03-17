@@ -15,7 +15,7 @@ import java.util.Map;
  * @since 2023/3/8 20:42
  */
 @Configuration
-public class RabbitMqConfig1 {
+public class  RabbitMqConfig1 {
 
     @Bean(name = "firstQueue")
     public Queue returnTestQueue() {
