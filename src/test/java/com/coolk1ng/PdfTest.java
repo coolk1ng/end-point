@@ -11,7 +11,7 @@ import java.io.File;
  * @author coolk1ng
  * @since 2023/2/10 14:46
  */
-public class PdfTest extends FrameUseApplicationTests{
+public class PdfTest extends EndPointApplicationTests {
 
     /**
      * 阅读pdf文本

@@ -13,7 +13,6 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ import java.util.UUID;
  * @author coolk1ng
  * @since 2023/2/10 14:34
  */
-public class RabbitMqTest extends FrameUseApplicationTests{
+public class RabbitMqTest extends EndPointApplicationTests {
     private final static Logger logger = LoggerFactory.getLogger(RabbitMqTest.class);
 
     @Autowired

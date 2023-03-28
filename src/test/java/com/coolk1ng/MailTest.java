@@ -15,7 +15,7 @@ import java.util.List;
  * @author coolk1ng
  * @since 2023/2/10 14:30
  */
-public class MailTest extends FrameUseApplicationTests{
+public class MailTest extends EndPointApplicationTests {
     @Autowired
     private SendMail sendMail;
 
