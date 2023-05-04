@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolk1ng.transaction.UserMapper">
+    <insert id="insert" parameterType="com.coolk1ng.transaction.User">
+        insert into t_user
+        (username, age) values (#{username}, #{age})
+    </insert>
+
+    <update id="update" parameterType="com.coolk1ng.transaction.User">
+        update t_user
+        <set>
+            age = #{age}
+        </set>
+        where username = #{username}
+    </update>
+</mapper>

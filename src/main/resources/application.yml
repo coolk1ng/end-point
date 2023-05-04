@@ -4,7 +4,7 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/end-point?useUnicode=true&useSSL=false&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/end_point?useUnicode=true&useSSL=false&allowMultiQueries=true
     username: root
     password: root
 # 邮件
@@ -39,9 +39,22 @@ spring:
           enabled: true
         prefetch: 1
         auto-startup: true
+# redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    timeout: 1000
+    database: 10
+    jedis:
+      pool:
+        min-idle: 5
+        max-active: 10
+        max-idle: 10
+        max-wait: 2000
 # mybatis
 mybatis:
-  mapper-locations: classpath*:mapper/*/*.xml
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
   configuration:
     map-underscore-to-camel-case: true
 logging:
