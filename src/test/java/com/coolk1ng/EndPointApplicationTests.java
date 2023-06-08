@@ -24,4 +24,9 @@ class EndPointApplicationTests {
     void test2() {
         transactionExample.newTransactionEveryTime();
     }
+
+    @Test
+    void test3() {
+        transactionExample.transaction();
+    }
 }

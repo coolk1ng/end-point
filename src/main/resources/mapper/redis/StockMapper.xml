@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coolk1ng.redis.mapper.StockMapper">
+    <select id="getStock" parameterType="com.coolk1ng.redis.entity.Stock" resultType="com.coolk1ng.redis.entity.Stock">
+        select id, `type`, `count`
+        from stock
+        <where>
+            <if test="type != null and type != ''">
+                AND type = #{type}
+            </if>
+        </where>
+    </select>
+</mapper>

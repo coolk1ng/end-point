@@ -1,4 +1,4 @@
-package com.coolk1ng.redis;
+package com.coolk1ng.redis.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +43,17 @@ public class RedisController {
         BoundHashOperations<String, Object, Object> boundHashOperations = stringRedisTemplate.boundHashOps("hash");
         boundHashOperations.delete("key1", "key2");
         boundHashOperations.put("key4", "value4");
+    }
+
+    @GetMapping("/autoIncrKey")
+    public void autoIncrKey() {
+        Boolean count = stringRedisTemplate.opsForValue().setIfAbsent("count", "0");
+        if (Boolean.FALSE.equals(count)) return;
+        for (int i = 0; i < 10; i++) {
+            Boolean flag = stringRedisTemplate.opsForValue().setIfAbsent("autoIncrKey-" + i, "autoIncrValue-" + i);
+            if (Boolean.FALSE.equals(flag)) continue;
+            Long increment = stringRedisTemplate.opsForValue().increment("count", 1);
+            log.info("autoIncrKey-" + i + "的ID:{}", increment);
+        }
     }
 }

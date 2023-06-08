@@ -5,7 +5,6 @@ import com.coolk1ng.rabbitmq.entity.User;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessagePostProcessor;
@@ -64,20 +63,14 @@ public class RabbitMqTest extends EndPointApplicationTests {
 
     @Test
     public void test4() {
-        MessagePostProcessor mpp1 = new MessagePostProcessor() {
-            @Override
-            public Message postProcessMessage(Message message) throws AmqpException {
-                message.getMessageProperties().setExpiration("5000");
-                return message;
-            }
+        MessagePostProcessor mpp1 = message -> {
+            message.getMessageProperties().setExpiration("5000");
+            return message;
         };
 
-        MessagePostProcessor mpp2 = new MessagePostProcessor() {
-            @Override
-            public Message postProcessMessage(Message message) throws AmqpException {
-                message.getMessageProperties().setExpiration("10000");
-                return message;
-            }
+        MessagePostProcessor mpp2 = message -> {
+            message.getMessageProperties().setExpiration("10000");
+            return message;
         };
 
         rabbitTemplate.convertAndSend("test_ttl_exchange", "ttl.1", "message ttl...", mpp1);

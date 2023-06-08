@@ -22,22 +22,27 @@ public class TransactionExample {
     public void doTransactional() {
         TransactionConsumer transactionConsumer = () -> {
             userMapper.insert(User.builder().username("张三").age(10).build());
-            throw new RuntimeException();
+//            throw new RuntimeException();
         };
+        int a = 1 / 0;
         transactionConsumer.doInTransactional();
     }
 
     //事务失效
-    @Transactional
+//    @Transactional
     public void transactionFailTest1() {
         userMapper.insert(User.builder().username("张三").age(10).build());
         this.update(User.builder().username("张三").age(20).build());
-        int a = 1 / 0;
     }
 
     @Transactional
     public void update(User user) {
-        userMapper.update(user);
+        try {
+            userMapper.update(user);
+            int a = 1 / 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //独立事务
@@ -50,6 +55,14 @@ public class TransactionExample {
             } catch (Exception e) {
 
             }
+        }
+    }
+
+    public void transaction() {
+        User user = User.builder().username(String.valueOf(1)).age(1).build();
+        try {
+            transactionExample1.insertUser(user);
+        } catch (Exception ignored) {
         }
     }
 }
